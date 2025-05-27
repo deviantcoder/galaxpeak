@@ -1,0 +1,147 @@
+{% extends "_base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #121212;
+        color: #f8f9fa;
+    }
+
+    .navbar {
+        background: rgba(26, 25, 25, 0.5) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #1a1a2e 0%, #2f3e67 100%);
+        border-bottom: 1px solid #333;
+    }
+
+    .feature-card {
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fs-3 fw-bold" href="#">
+            <i class="bi bi-stars me-2"></i>GalaxPeak
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="hero-section py-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4">Connect Across the <span class="text-primary">Galaxy</span></h1>
+                <p class="lead mb-4">GalaxPeak brings people together with seamless, secure, and stellar chat
+                    experiences. Join millions of users in our cosmic community.</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="btn btn-primary btn-lg px-4">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-lg px-4">
+                        <i class="bi bi-person-plus me-2"></i>Register
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                <h1 class="display-2 display-md-1 fw-bold text-info">
+                    <span id="typed-text"></span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="features" class="py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold display-5 mb-3">Stellar Features</h2>
+            <p class="lead">Explore what makes GalaxPeak out of this world</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card p-4 rounded-3 h-100">
+                    <div class="feature-icon mb-3 text-primary fs-1">
+                        <i class="bi bi-lightning-charge"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p class="text-secondary">Experience real-time messaging with our low-latency infrastructure powered
+                        by quantum relays.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card p-4 rounded-3 h-100">
+                    <div class="feature-icon mb-3 text-primary fs-1">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <h3>Group Nebulas</h3>
+                    <p class="text-secondary">Create or join group chats (we call them Nebulas) with up to 10,000
+                        members.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card p-4 rounded-3 h-100">
+                    <div class="feature-icon mb-3 text-primary fs-1">
+                        <i class="bi bi-infinity"></i>
+                    </div>
+                    <h3>Infinite History</h3>
+                    <p class="text-secondary">Never lose a message with our unlimited cloud storage for your chat
+                        history.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="py-4 border-top border-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0 text-secondary">&copy; 2025 GalaxPeak. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-decoration-none text-info me-3">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="#" class="text-decoration-none text-info me-3">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="#" class="text-decoration-none text-info me-3">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="#" class="text-decoration-none text-info">
+                    <i class="bi bi-github"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock content %}
+{% block extra_js %}
+<script src="{% static "js/typed.js" %}"></script>
+{% endblock extra_js %}
