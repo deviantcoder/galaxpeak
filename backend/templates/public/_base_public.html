@@ -1,0 +1,33 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <style>
+        body {
+            background-color: #121212;
+            color: #f8f9fa;
+        }
+        .navbar {
+            background: rgba(26, 25, 25, 0.5) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2f3e67 100%);
+            border-bottom: 1px solid #333;
+        }
+        .feature-card {
+            background-color: #20333b;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    {% include "public/includes/navbar.html" %}
+
+    {% block public_content %}
+    {% endblock public_content %}
+    
+    {% include "public/includes/footer.html" %}
+{% endblock content %}

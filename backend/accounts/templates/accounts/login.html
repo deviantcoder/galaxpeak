@@ -1,0 +1,55 @@
+{% extends "public/_base_public.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+    Sign In
+{% endblock title %}
+
+{% block public_content %}
+    <div class="d-flex justify-content-center align-items-center m-1 mt-3 mb-5">
+        <div class="card shadow-lg border-0 rounded-5 p-4" style="max-width: 30rem; width: 100%;">
+            <div class="card-body text-center">
+                <h3 class="card-title mb-4 fw-bold">Sign In</h3>
+                <form method="post" action="{% url 'accounts:login' %}">
+                    {% csrf_token %}
+                    <div class="mb-3 text-start">
+                        {{ form.username|add_label_class:"form-label text-white" }}
+                        {% render_field form.username class="form-control form-control-lg" %}
+                    </div>
+                    <div class="mb-3 text-start">
+                        {{ form.password|add_label_class:"form-label text-white" }}
+                        {% render_field form.password class="form-control form-control-lg" %}
+                    </div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary btn-lg w-100 mt-2">Sign In</button>
+                </form>
+                <div class="mt-4 text-muted small">
+                    <p>
+                        <a href="" class="text-decoration-none text-primary">Forgot password?</a><br>
+                        Don’t have an account? <a href="" class="text-decoration-none text-primary">Sign up</a>
+                    </p>
+                </div>
+                <hr class="my-4">
+                <p class="text-muted mb-2 small">or sign in with:</p>
+                <div class="d-flex justify-content-center flex-wrap gap-2">
+                    <a href="" class="btn btn-outline-light rounded-pill d-flex align-items-center px-3 py-2">
+                        <i class="bi bi-google me-2" style="font-size: 1.2rem;"></i>
+                        <span>Google</span>
+                    </a>
+                    <a href="" class="btn btn-outline-light rounded-pill d-flex align-items-center px-3 py-2">
+                        <i class="bi bi-github me-2" style="font-size: 1.2rem;"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock public_content %}
