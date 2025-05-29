@@ -48,7 +48,6 @@ class SignupUserView(generic.CreateView):
     form_class = SignupForm
     success_url = reverse_lazy('accounts:test')
     template_name = 'accounts/signup.html'
-    redirect_authenticated_user = True
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
