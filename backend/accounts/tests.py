@@ -6,7 +6,7 @@ from django.urls import reverse
 User = get_user_model()
 
 
-class TestUserModel(TestCase):
+class TestLoginView(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username='testuser',
@@ -49,3 +49,32 @@ class TestUserModel(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['user'].is_authenticated)
+
+
+class TestLogoutView(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(
+            username='testuser',
+            password='testpass123'
+        )
+        self.login_url = reverse('accounts:login')
+        self.logout_url = reverse('accounts:logout')
+
+        self.client.post(
+            self.login_url,
+            {
+                'username': 'testuser',
+                'password': 'testpass123',
+            },
+        )
+
+    def test_logout_with_post_request(self):
+        response = self.client.post(self.logout_url, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['user'].is_authenticated)
+
+    def test_logout_with_get_request(self):
+        response = self.client.get(self.logout_url)
+
+        self.assertEqual(response.status_code, 405)

@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.contrib import messages
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.conf import settings
 
 from .forms import LoginForm
 
@@ -27,3 +29,11 @@ class LoginUserView(LoginView):
                     messages.warning(self.request, f'{field.capitalize()}: {error}')
 
         return super().form_invalid(form)
+    
+
+class LogoutUserView(LogoutView):
+    next_page = reverse_lazy(settings.LOGOUT_REDIRECT_URL)
+
+    def dispatch(self, request, *args, **kwargs):
+        messages.info(request, "You've been logged out.")
+        return super().dispatch(request, *args, **kwargs)
