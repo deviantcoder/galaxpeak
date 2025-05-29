@@ -6,7 +6,7 @@ from django.urls import reverse
 User = get_user_model()
 
 
-class TestLoginView(TestCase):
+class TestUserLogin(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username='testuser',
@@ -51,7 +51,7 @@ class TestLoginView(TestCase):
         self.assertTrue(response.context['user'].is_authenticated)
 
 
-class TestLogoutView(TestCase):
+class TestUserLogout(TestCase):
     def setUp(self):
         self.user = User.objects.create(
             username='testuser',

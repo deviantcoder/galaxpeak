@@ -1,4 +1,9 @@
-from django.contrib.auth.forms import AuthenticationForm
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class LoginForm(AuthenticationForm):
@@ -6,3 +11,20 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'placeholder': 'Enter your username or email'})
         self.fields['password'].widget.attrs.update({'placeholder': 'Enter your password'})
+
+
+class SignupForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'password1', 'password2')
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data.get('email')
+
+        if commit:
+            user.save()
+            
+        return user
