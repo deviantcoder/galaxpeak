@@ -53,9 +53,10 @@ class TestUserLogin(TestCase):
 
 class TestUserLogout(TestCase):
     def setUp(self):
-        self.user = User.objects.create(
+        self.user = User.objects.create_user(
             username='testuser',
-            password='testpass123'
+            password='testpass123',
+            email='testuser@example.com'
         )
         self.login_url = reverse('accounts:login')
         self.logout_url = reverse('accounts:logout')
@@ -194,3 +195,26 @@ class TestUserSignup(TestCase):
     def test_signup_form_contains_csrf(self):
         response = self.client.get(self.signup_url)
         self.assertContains(response, 'csrfmiddlewaretoken')
+
+
+class TestProfileModel(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser',
+            password='testpass123',
+            email='testuser@example.com',
+        )
+
+    def test_user_has_profile(self):
+        self.assertTrue(self.user.profile)
+        self.assertEqual(self.user.profile.pk, self.user.pk)
+
+    def test_user_profile_has_display_name(self):
+        self.assertEqual(self.user.profile.display_name, 'testuser')
+
+    def test_change_display_name(self):
+        profile = self.user.profile
+        profile.display_name = 'TestUser_new'
+        profile.save(update_fields=['display_name'])
+
+        self.assertEqual(profile.display_name, 'TestUser_new')
