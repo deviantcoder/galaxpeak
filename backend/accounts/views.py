@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import get_user_model, login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 from django.views import generic
 
@@ -42,6 +43,10 @@ class LogoutUserView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.info(request, "You've been logged out.")
         return super().dispatch(request, *args, **kwargs)
+
+
+class LogoutConfirmView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'accounts/logout.html'
     
 
 class SignupUserView(generic.CreateView):
