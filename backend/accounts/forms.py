@@ -20,6 +20,13 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ('email', 'username', 'password1', 'password2')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update({'placeholder': 'Enter your email'})
+        self.fields['username'].widget.attrs.update({'placeholder': 'Create a username'})
+        self.fields['password1'].widget.attrs.update({'placeholder': 'Create a password'})
+        self.fields['password2'].widget.attrs.update({'placeholder': 'Repeat your password'})
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data.get('email')
